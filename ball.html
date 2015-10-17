@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Canvas</title>
+
+    <style type="text/css">
+        body {
+          background-color: white;
+
+        }
+        canvas{
+            border: solid 1px black;
+            margin: auto;
+            display: block;
+            background-color: aliceblue;
+        }
+    </style>
+
+  </head>
+
+  <body>
+
+    <canvas id="canvas-for-ball" width="1300" height="600"></canvas>
+
+    <script type="text/javascript">
+
+        // Gets a handle to the element with id canvasOne.
+        var canvas = document.getElementById("canvas-for-ball");
+        // Get a 2D context for the canvas.
+        var ctx = canvas.getContext("2d");
+      
+        var ball = {
+            x: 100, 
+            y: 100, 
+            r: 50, 
+            vy: 10, 
+            vx: 10
+        };
+        
+        
+        var ball2 = {
+            x: 60, 
+            y: 60, 
+            r: 30, 
+            vy: 5, 
+            vx: 5
+        };
+
+
+        // A function to repeat every time the animation loops.
+        function repeatme() {
+            // Draw the ball (stroked, not filled).
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.beginPath();
+            ctx.arc(ball.x, ball.y, ball.r, 0, 2 * Math.PI);
+            ctx.arc(ball2.x, ball2.y, ball2.r, 0, 2 * Math.PI);
+            // ctx.stroke();
+            ctx.fill();
+
+            // Update the y location.
+            if(ball.y >= canvas.height - ball.r){
+              ball.vy =- ball.vy;
+            } 
+            if(ball.y <= ball.r){
+              ball.vy =- ball.vy;
+            }
+            if(ball.x >= canvas.width - ball.r){
+                ball.vx =- ball.vx;
+            }
+            if(ball.x <= ball.r){
+                ball.vx =- ball.vx;
+            }
+            ball.y += ball.vy;// Ball Moves up & Down
+            ball.x += ball.vx; // Ball moes left and right
+            
+            
+            
+            // Update the y location.
+            if(ball2.y >= canvas.height - ball2.r){
+                ball2.vy =- ball2.vy;
+            } 
+            if(ball2.y <= ball2.r){
+                ball2.vy =- ball2.vy;
+            }
+            if(ball2.x >= canvas.width - ball2.r){
+                ball2.vx =- ball2.vx;
+            }
+            if(ball2.x <= ball2.r){
+                ball2.vx =- ball2.vx;
+            }
+            ball2.y += ball2.vy;// Ball Moves up & Down
+            ball2.x += ball2.vx; // Ball moes left and right
+
+            window.requestAnimationFrame(repeatme);
+        } // End repeat me
+
+        // Start the animation going.
+        repeatme();
+
+    </script>
+
+  </body>
+
+</html>
